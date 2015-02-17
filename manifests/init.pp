@@ -26,6 +26,8 @@ class dhcp (
   $pools              = {},
   $hosts              = {},
   $includes           = undef,
+  $onie_inst_def_url     = 'http://10.0.0.1/cumulus-img.bin',
+  $cumulus_provision_url = 'http://10.0.0.1/provision.sh',
 ) inherits dhcp::params {
 
   # Incase people set interface instead of interfaces work around

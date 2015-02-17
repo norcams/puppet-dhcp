@@ -17,6 +17,40 @@ max-lease-time <%= @max_lease_time %>;
 authoritative;
 <% end -%>
 
+# *********** force10/cumulus options ***********
+# Create an option namespace called ONIE for VIVSO (option 125)
+option space onie code width 1 length width 1;
+
+# Define the code names and data types within the ONIE namespace
+option onie.installer_url code 1 = text;
+option onie.updater_url code 2 = text;
+option onie.machine code 3 = text;
+option onie.arch code 4 = text;
+option onie.machine_rev code 5 = text;
+
+# Package the ONIE namespace into option 125
+option space vivso code width 4 length width 1;
+option vivso.onie code 42623 = encapsulate onie;
+option vivso.iana code 0 = string;
+option op125 code 125 = encapsulate vivso;
+
+class "onie_dell_s4810" {
+        match if (substring(option vendor-class-identifier, 0, 11) = "onie_vendor:");
+        if option onie.arch = "powerpc" {
+                option default-url = "<%= @onie_inst_def_url %>";
+                }
+        }
+
+option cumulus-provision-url code 239 = text;
+
+class "cumulus_s4810" {
+        match if (substring(option host-name,0,7) = "cumulus");
+        option cumulus-provision-url "<%= @cumulus_provision_url %>";
+        }
+
+# ***********************************************
+
+
 <% if has_variable?( 'dnsupdatekey' ) and @dnsupdatekey -%>
 ddns-updates on;
 ddns-update-style interim;
