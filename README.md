@@ -7,7 +7,7 @@ Installs and manages a DHCP server.
 
 ## Dependencies
 
-* Native-type Concat module (https://github.com/onyxpoint/pupmod-concat)
+* [Puppetlabs Concat module](https://github.com/puppetlabs/puppetlabs-concat)
 
 ## Features
 * Multiple subnet support
@@ -58,8 +58,9 @@ For the support of static routes (RFC3442):
       network => '10.0.1.0',
       mask    => '255.255.255.0',
       range   => '10.0.1.100 10.0.1.200',
-      gateway => '10.0.1.1',
-      static_routes =>  [ { 'mask' => '32', 'network' => '169.254.169.254', 'gateway' => $ip } ],
+      gateway => $gw,
+      static_routes =>  [ { 'mask' => '32', 'network' => '169.254.169.254', 'gateway' => $ip },
+                          { 'mask' => '0',                                  'gateway' => $gw } ],
     }
 
 ### dhcp::host
@@ -72,6 +73,24 @@ Create host reservations.
     }
 
 ## Contributors
-Zach Leslie <zach.leslie@gmail.com>
-Ben Hughes <git@mumble.org.uk>
-Greg Sutcliffe <greg.sutcliffe@gmail.com>
+
+Original authors:
+
+* Zach Leslie <zach.leslie@gmail.com>
+* Ben Hughes <git@mumble.org.uk>
+* Greg Sutcliffe <greg.sutcliffe@gmail.com>
+
+Copyright (c) 2010-2016 Zach Leslie, Ben Hughes, Greg Sutcliffe, Foreman
+developers
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.

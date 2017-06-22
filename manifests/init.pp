@@ -11,7 +11,9 @@ class dhcp (
   $omapi_name         = undef,
   $omapi_key          = undef,
   $pxeserver          = undef,
-  $pxefilename        = undef,
+  $pxefilename        = $dhcp::params::pxefilename,
+  $mtu                = undef,
+  $bootfiles          = $dhcp::params::bootfiles,
   $logfacility        = 'local7',
   $dhcp_monitor       = true,
   $dhcp_dir           = $dhcp::params::dhcp_dir,
@@ -21,6 +23,7 @@ class dhcp (
   $options            = undef,
   $authoritative      = false,
   $dhcp_root_group    = $dhcp::params::root_group,
+  $ddns_updates       = false,
   $ddns_domainname    = undef,
   $ddns_rev_domainname= undef,
   $pools              = {},
@@ -29,6 +32,11 @@ class dhcp (
   $onie_inst_def_url     = 'http://10.0.0.1/cumulus-img.bin',
   $cumulus_provision_url = 'http://10.0.0.1/provision.sh',
 ) inherits dhcp::params {
+
+  if $mtu {
+    validate_integer($mtu)
+  }
+  validate_hash($bootfiles)
 
   # Incase people set interface instead of interfaces work around
   # that. If they set both, use interfaces and the user is a unwise
