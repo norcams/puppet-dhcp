@@ -40,7 +40,7 @@ class "onie_dell_s4048" {
 }
 
 class "onie_dell_s4148" {
-  match if (substring(option vendor-class-identifier, 0, 29) = "onie_vendor:x86_64-dell_s4100");
+  match if (substring(option vendor-class-identifier, 0, 32) = "onie_vendor:x86_64-dellemc_s4100");
   option default-url = "http://repo.mgmt.bgo.uhdc.no/cumuluslinux/onie-installer-amd64";
 }
 
