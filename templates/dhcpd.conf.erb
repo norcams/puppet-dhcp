@@ -52,9 +52,16 @@ class "onie_dell_s4810" {
         }
 
 option cumulus-provision-url code 239 = text;
+# opx option
+option ztd-provision-url code 240 = text;
 
 class "cumulus_s4810" {
         match if (substring(option host-name,0,7) = "cumulus");
+        option cumulus-provision-url "<%= @cumulus_provision_url %>";
+        }
+
+class "opx_provision" {
+        match if (substring(option host-name,0,3) = "opx");
         option cumulus-provision-url "<%= @cumulus_provision_url %>";
         }
 
