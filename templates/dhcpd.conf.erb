@@ -67,6 +67,11 @@ class "opx_provision" {
 
 # ***********************************************
 
+# ***** Zero-touch provisioning of 14g iDRAC ****
+
+option idrac-provision-url code 43 = text;
+
+# ***********************************************
 
 <% if (@dnsupdatekey && !@dnsupdatekey.empty?) || @ddns_updates -%>
 ddns-updates on;
