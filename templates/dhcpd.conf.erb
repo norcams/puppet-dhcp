@@ -34,6 +34,11 @@ option vivso.onie code 42623 = encapsulate onie;
 option vivso.iana code 0 = string;
 option op125 code 125 = encapsulate vivso;
 
+class "onie_dell_s3048" {
+  match if (substring(option vendor-class-identifier, 0, 29) = "onie_vendor:x86_64-dell_s3000");
+  option default-url = "http://repo.mgmt.bgo.uhdc.no/opx/PKGS_OPX-installer-x86_64.bin";
+}
+
 class "onie_dell_s4048" {
   match if (substring(option vendor-class-identifier, 0, 29) = "onie_vendor:x86_64-dell_s4000");
   option default-url = "http://repo.mgmt.bgo.uhdc.no/cumuluslinux/onie-installer-amd64";
@@ -60,10 +65,16 @@ class "cumulus_s4810" {
         option cumulus-provision-url "<%= @cumulus_provision_url %>";
         }
 
-class "opx_provision" {
+class "opx_provision_vagrant" {
         match if (substring(option host-name,0,3) = "opx");
-        option cumulus-provision-url "<%= @cumulus_provision_url %>";
+        option ztd-provision-url "<%= @cumulus_provision_url %>";
         }
+
+class "opx_provision" {
+        match if (substring(option host-name,0,3) = "OPX");
+        option ztd-provision-url "<%= @cumulus_provision_url %>";
+        }
+
 
 # ***********************************************
 
