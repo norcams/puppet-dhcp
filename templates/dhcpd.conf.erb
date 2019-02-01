@@ -36,17 +36,17 @@ option op125 code 125 = encapsulate vivso;
 
 class "onie_dell_s3048" {
   match if (substring(option vendor-class-identifier, 0, 29) = "onie_vendor:x86_64-dell_s3000");
-  option default-url = "http://repo.mgmt.bgo.uhdc.no/opx/PKGS_OPX-installer-x86_64.bin";
+  option default-url = "http://repo.mgmt.<%= @location %>.uhdc.no/opx/PKGS_OPX-installer-x86_64.bin";
 }
 
 class "onie_dell_s4048" {
   match if (substring(option vendor-class-identifier, 0, 29) = "onie_vendor:x86_64-dell_s4000");
-  option default-url = "http://repo.mgmt.bgo.uhdc.no/cumuluslinux/onie-installer-amd64";
+  option default-url = "http://repo.mgmt.<%= @location %>.uhdc.no/cumuluslinux/onie-installer-amd64";
 }
 
 class "onie_dell_s4148" {
   match if (substring(option vendor-class-identifier, 0, 32) = "onie_vendor:x86_64-dellemc_s4100");
-  option default-url = "http://repo.mgmt.bgo.uhdc.no/cumuluslinux/onie-installer-amd64";
+  option default-url = "http://repo.mgmt.<%= @location %>.uhdc.no/cumuluslinux/onie-installer-amd64";
 }
 
 class "onie_dell_s4810" {
